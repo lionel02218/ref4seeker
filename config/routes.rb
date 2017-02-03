@@ -8,9 +8,11 @@ Rails.application.routes.draw do
     resources :favorites, only: [:create, :destroy, :update]
     resources :votes, only: [:create, :update, :destroy]
     resources :answers
+    member do
+      post :send_mail
+    end
     collection do
       post :search
-      post :send_mail
     end
   end
 end

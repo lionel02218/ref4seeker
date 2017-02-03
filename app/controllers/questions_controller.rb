@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :find_question, only: [:edit, :destroy, :update, :vote_up, :vote_down]
+  before_action :find_question, only: [:edit, :destroy, :update, :vote_up, :vote_down, :send_mail]
   before_action :authenticate_user!, except: [:index]
 
   def index
@@ -58,6 +58,14 @@ class QuestionsController < ApplicationController
   end
   def search
   end
+
+  def send_mail
+    answer_id = params[:answer_id]
+    message   = params[:message]
+    UserMailer.reply(answer_id, message).deliver_later
+    redirect_to question_path(@question)
+  end
+
   private
 
   def question_attributes

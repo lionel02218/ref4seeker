@@ -1,18 +1,19 @@
 #send_email_modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "send_email_modal", :role => "dialog", :tabindex => "-1"}
   .modal-dialog{:role => "document"}
     .modal-content
-      .modal-header
-        %h5#exampleModalLabel.modal-title New message
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} ×
-      .modal-body
-        %form
+      = form_tag send_mail_question_path(@question), method: "post" do
+        .modal-header
+          %h5#exampleModalLabel.modal-title New message
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+        .modal-body
+          = hidden_field_tag :answer_id
           .form-group
-            %label.form-control-label{:for => "recipient-name"} Recipient:
-            %input#recipient-name.form-control{:type => "text"}/
+            = label_tag :recipient, "Recipient", class: "form-control-label"
+            = text_field_tag :recipient, nil, class: "form-control"
           .form-group
-            %label.form-control-label{:for => "message-text"} Message:
-            %textarea#message-text.form-control
-      .modal-footer
-        %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
-        %button.btn.btn-primary{:type => "button"} Send message
+            = label_tag :message, "Message", class: "form-control-label"
+            = text_area_tag :message, nil, class: "form-control"
+        .modal-footer
+          %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
+          = submit_tag "Send Message", class: "btn btn-primary"

@@ -10,4 +10,4 @@
     - if answer.user == current_user
       = button_to "Delete", question_answer_path(@question, answer), method: :delete, class: "btn btn-default", data: {confirm: "Are you sure you want to delete this answer?"}
     - if current_user.seeker? and current_user == answer.question.user
-      %button.btn.btn-primary{"data-target" => "#send_email_modal", "data-toggle" => "modal", "data-whatever" => answer.user.email, :type => "button"} Send Mail
+      %button.btn.btn-primary{"data-target" => "#send_email_modal", "data-toggle" => "modal", "data-answer-id": answer.id, "data-whatever" => answer.user.full_name, :type => "button"} Send Mail
