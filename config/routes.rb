@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
-  resources :votes
-  resources :comments
+  # devise_for :views
   devise_for :users, :controllers => {:registrations => "registrations"}
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: 'home#index'
+  resources :comments
+  root "questions#index"
+  get "home/index"
+  resources :questions do
+    resources :favorites, only: [:create, :destroy, :update]
+    resources :votes, only: [:create, :update, :destroy]
+    resources :answers
+    collection do
+      post :search
+      post :send_mail
+    end
+  end
 end

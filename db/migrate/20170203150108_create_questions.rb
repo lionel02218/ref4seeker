@@ -4,6 +4,7 @@ class CreateQuestions < ActiveRecord::Migration[5.0]
       t.belongs_to :user, foreign_key: true
       t.string :title
       t.text :description
+      t.integer :vote_count
 
       t.timestamps
     end

@@ -1,0 +1,10 @@
+- if current_user.source?
+  %h2 Add an Answer
+  - if @answer.errors.any?
+    %ul
+      - @answer.errors.full_messages.each do |message|
+        %li message
+  = form_for @answer, url: question_answers_path(@question), remote: true do |f|
+    = f.text_area :body, class: "form-control"
+    = f.submit class: "btn btn-default"
+    %hr

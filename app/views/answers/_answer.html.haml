@@ -1,0 +1,13 @@
+.lightwell.answer.col-sm-4{id: dom_id(answer)}
+  %p= answer.body
+  %p
+    Answered by
+    = link_to answer.user.full_name, "#"
+    = ","
+    = formatted_date(answer.created_at)
+
+  .col-sm-4
+    - if answer.user == current_user
+      = button_to "Delete", question_answer_path(@question, answer), method: :delete, class: "btn btn-default", data: {confirm: "Are you sure you want to delete this answer?"}
+    - if current_user.seeker? and current_user == answer.question.user
+      %button.btn.btn-primary{"data-target" => "#send_email_modal", "data-toggle" => "modal", "data-whatever" => answer.user.email, :type => "button"} Send Mail

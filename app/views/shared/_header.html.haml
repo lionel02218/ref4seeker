@@ -9,17 +9,18 @@
       %a.navbar-brand{:href => root_path} Seeker
     #navbar.navbar-collapse.collapse
       %ul.nav.navbar-nav
-        %li.active
-          %a{:href => "#"} Home
+        %li
+          %a{:href => root_path} Questions
         %li
           %a{:href => "#"} About
-        %li
-          %a{:href => "#"} Contact
+        - if current_user.present? and current_user.seeker?
+          %li
+            %li= link_to "New Question", new_question_path
       %ul.nav.navbar-nav.navbar-right
         - if current_user.present?
           %li.dropdown
             %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-              = current_user.email
+              = current_user.full_name
               %span.caret
             %ul.dropdown-menu
               %li

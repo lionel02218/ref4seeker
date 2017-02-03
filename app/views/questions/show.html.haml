@@ -1,0 +1,20 @@
+.lightjumbotron
+  %h1= @question.title
+  - if session[:has_voted]
+    %p vote count: #{@question.vote_count}
+  - else
+  - if @question.categories.present?
+    Categories (#{@question.categories.count})
+    = @question.categories.map(&:title).join(", ")
+  %p= @question.description
+  %p= formatted_date(@question.created_at)
+
+  = render "questions/favorite_and_voute"
+  = render "questions/seeker_actions"
+  = render "questions/answering"
+
+.answers
+  - @question.answers.each do |answer|
+    = render "/answers/answer", answer: answer
+
+= render "questions/send_email_modal"
