@@ -62,8 +62,8 @@ class QuestionsController < ApplicationController
   def send_mail
     answer_id = params[:answer_id]
     message   = params[:message]
-    UserMailer.reply(answer_id, message).deliver_later
-    redirect_to question_path(@question)
+    UserMailer.reply(answer_id, message).deliver_later    
+    redirect_to question_path(@question), notice: "Sent mail successfully"
   end
 
   private
