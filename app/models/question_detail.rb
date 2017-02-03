@@ -1,0 +1,3 @@
+class QuestionDetail < ApplicationRecord
+  belongs_to :question
+end
